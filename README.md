@@ -183,8 +183,8 @@ $('#myInput').smartFormat({
 💡 可通过 specialWords 选项扩展或覆盖
 #### 文件扩展名列表
 
-text
-```html
+
+```text
 ipa, apk, exe, dmg, pkg, deb, rpm, txt, md, js, ts, json, xml, html, css,
 py, java, cpp, c, go, rs, php, rb, pdf, doc, docx, xls, xlsx, ppt, pptx,
 zip, rar, 7z, tar, gz, bz2, iso, png, jpg, jpeg, gif, svg, ico, mp3, mp4,
