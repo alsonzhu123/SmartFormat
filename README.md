@@ -17,7 +17,7 @@
 
 </div>
 
-## [在线演示](https://alsonzhu123.github.io/SmartFormat/)
+## [**在线演示**](https://alsonzhu123.github.io/SmartFormat/)
 
 
 ---
@@ -87,6 +87,8 @@ $('#myInput').smartFormat('destroy');
 |获取格式化值|$element.smartFormat('getValue')|String|获取格式化后的值（不修改输入框）|
 |更新配置|$element.smartFormat('updateOptions', options)	|jQuery对象|动态更新配置|
 销毁插件|$element.smartFormat('destroy')|jQuery对象|销毁插件，恢复原始状态|
+
+---
 
 ### ⚙️ 配置选项
 完整配置示例
@@ -160,6 +162,8 @@ $('#myInput').smartFormat({
 |onFormat	|function	|null|	格式化完成回调|
 |onError	|function	|null	|错误回调|
 
+---
+
 ### 🔧 内置数据
 #### 特殊单词映射表
 
@@ -196,6 +200,9 @@ javascript
 ```html
 $('#title').smartFormat();
 ```
+
+---
+
 #### 场景2：批量初始化
 javascript
 ```html
@@ -229,6 +236,8 @@ $('#myForm').on('submit', function(e) {
     // 提交数据...
 });
 ```
+---
+
 ### 🎯 格式化效果示例
 |输入|	输出|	说明|
 |-----|-------|-------|
@@ -242,6 +251,8 @@ $('#myForm').on('submit', function(e) {
 |你好世界	|你好世界	|中文不受影响|
 |hello你好world|	Hello你好World|	中英文混合|
 
+---
+
 ### ⚠️ 注意事项
 |注意点	|说明|
 |-----|-------|
@@ -251,6 +262,9 @@ $('#myForm').on('submit', function(e) {
 |性能|	适合中等长度文本（建议 < 5000 字符）|
 |特殊单词	|默认不区分大小写匹配|
 |全局污染	|仅暴露 $.fn.smartFormat，无全局变量|
+
+---
+
 ### 🐛 调试模式
 
 开启 debug: true 后，控制台会输出详细的格式化日志：
@@ -267,6 +281,8 @@ text
 
 [SmartFormat] 格式化: {原始: "hello world", 格式化后: "Hello World"}
 ```
+---
+
 ### 🔄 更新日志
 #### v1.1.0 (2024-01-15)
 ✨ 新增输入法支持（compositionstart/compositionend）
