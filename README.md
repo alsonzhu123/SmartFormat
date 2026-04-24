@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![jQuery](https://img.shields.io/badge/jQuery-1.7+-blue.svg)
+[![jQuery](https://img.shields.io/badge/jQuery-1.7+-blue.svg)](https://jquery.com/)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![Version](https://img.shields.io/badge/version-1.1.0-orange.svg)
 
@@ -12,7 +12,7 @@
 [![内置数据](https://img.shields.io/badge/内置-数据-yellow.svg)](#-内置数据)
 [![配置选项](https://img.shields.io/badge/配置-选项-yellow.svg)](#%EF%B8%8F-配置选项)
 [![配置选项](https://img.shields.io/badge/使用场景-yellow.svg)](#-使用场景)
-
+[![更新日志](https://img.shields.io/badge/使用场景-blue.svg)](#-更新日志)
 
 
 </div>
@@ -276,6 +276,7 @@ text
 🐛 修复输入法中频繁格式化的问题
 
 📝 优化光标位置计算逻辑
+
 
 #### v1.0.0 (2024-01-01)
 🎉 首次发布
