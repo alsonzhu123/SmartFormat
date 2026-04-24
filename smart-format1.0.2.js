@@ -1,7 +1,7 @@
 /**
  * SmartFormat - 智能输入格式化插件 version 1.02
  * 功能：全角转半角、文件名小写、句子首字母大写、特殊单词保留、不干扰其他语言输入法
- * @Alson zhu
+ * @ Alson zhu
  * E-Mail: alsonzhu@hotmail.com
  
  **/
