@@ -2,7 +2,7 @@
 
 <div align="center">
 
-[![jQuery](https://img.shields.io/badge/jQuery-1.7+-blue.svg)](https://jquery.com/)
+[![jQuery](https://img.shields.io/badge/jQuery-3.6+-blue.svg)](https://jquery.com/)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![Version](https://img.shields.io/badge/version-1.1.0-orange.svg)
 
