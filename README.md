@@ -47,7 +47,7 @@ SmartFormat 是一个基于 jQuery 的智能输入格式化插件，专为需要
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <!-- 引入 SmartFormat 插件 -->
-<script src="smart-format.js"></script>
+<script src="https://alsonzhu123.github.io/SmartFormat/en-smart-format1.02.js"></script>
 ```
 ### 2. 初始化插件
 
