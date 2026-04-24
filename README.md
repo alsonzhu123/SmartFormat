@@ -66,7 +66,7 @@ $('#myInput').smartFormat({
 ```
 ### 3. 方法调用
 
-``` javascript
+```javascript
 // 手动触发格式化
 var formatted = $('#myInput').smartFormat('format');
 
@@ -93,8 +93,7 @@ $('#myInput').smartFormat('destroy');
 ### ⚙️ 配置选项
 完整配置示例
 
-javascript
-```html
+```javascript
 $('#myInput').smartFormat({
     // 功能开关
     fullWidthToHalf: true,
@@ -167,8 +166,7 @@ $('#myInput').smartFormat({
 ### 🔧 内置数据
 #### 特殊单词映射表
 
-javascript
-```html
+```javascript
 {
     'iphone': 'iPhone',
     'ipad': 'iPad',
@@ -196,16 +194,14 @@ avi, mov, mkv, wav, sh, bat, ps1, sql, log, csv, ini, conf
 ### 📝 使用场景
 #### 场景1：简单输入框
 
-javascript
-```html
+```javascript
 $('#title').smartFormat();
 ```
 
 ---
 
 #### 场景2：批量初始化
-javascript
-```html
+```javascript
 // 为表单中所有需要格式化的输入框初始化
 $('input.formatted, textarea.formatted').smartFormat({
     debug: false,
@@ -214,20 +210,18 @@ $('input.formatted, textarea.formatted').smartFormat({
     }
 });
 ```
-### 场景3：动态添加元素
+#### 场景3：动态添加元素
 
-javascript
-```html
+```javascript
 function addNewInput() {
     var $newInput = $('<input type="text" class="dynamic-input">');
     $('#container').append($newInput);
     $newInput.smartFormat({ debug: true });
 }
 ```
-### 场景4：配合表单提交
+#### 场景4：配合表单提交
 
-javascript
-```html
+```javascript
 var $input = $('#myInput').smartFormat();
 
 $('#myForm').on('submit', function(e) {
@@ -269,8 +263,8 @@ $('#myForm').on('submit', function(e) {
 
 开启 debug: true 后，控制台会输出详细的格式化日志：
 
-text
-```html
+
+```text
 [SmartFormat] 初始化插件 jQuery.fn.init [input#myInput]
 
 [SmartFormat] 输入法激活，暂停格式化
