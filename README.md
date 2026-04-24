@@ -12,7 +12,7 @@
 [![内置数据](https://img.shields.io/badge/内置-数据-yellow.svg)](#-内置数据)
 [![配置选项](https://img.shields.io/badge/配置-选项-yellow.svg)](#%EF%B8%8F-配置选项)
 [![配置选项](https://img.shields.io/badge/使用场景-yellow.svg)](#-使用场景)
-[![更新日志](https://img.shields.io/badge/使用场景-blue.svg)](#-更新日志)
+[![更新日志](https://img.shields.io/badge/更新日志-blue.svg)](#-更新日志)
 
 
 </div>
