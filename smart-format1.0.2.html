@@ -240,6 +240,7 @@
 
         .demo-preview {
             margin-top: 16px;
+			min-height: 80px;
             padding: 14px 18px;
             background: white;
             border-radius: 12px;
@@ -328,9 +329,8 @@
             <button class="demo-btn" data-value="README.TXT">README.TXT</button>
             <button class="demo-btn" data-value="iphone is great">iphone is great</button>
             <button class="demo-btn" data-value="The file is Test.ipa">The file is Test.ipa</button>
-            <button class="demo-btn" data-value="ｈｅｌｌｏ　ｗｏｒｌｄ">全角英文</button>
+            <button class="demo-btn" data-value="ｈｅｌｌｏ　ｗｏｒｌｄ">全角英文</button><br>
             <button class="demo-btn" data-value="ｈｅｌｌｏ　mr.zhu！ 这是一份非常好的jquery代码。插件的文件是Smart-Format1.0.2.js">混合字符</button>
-
         </div>
     </div>
 
@@ -516,8 +516,11 @@ $('#container').append($new);</pre>
 
     <!-- 页脚 -->
     <div class="footer">
-        SmartFormat v1.1.0 | 智能输入格式化插件 | 支持全角转半角 · 文件名小写 · 句子格式化 · 输入法友好
-    </div>
+        <p>SmartFormat v1.0.2 | 智能输入格式化插件 | 支持全角转半角 · 文件名小写 · 句子格式化 · 输入法友好</p>
+    	<p><a href="mailto:alsonzhu@hotmail.com">
+		<img src="https://img.shields.io/badge/eMail%20to：-Alson%20Zhu-brightgreen.svg" alt="SVG Image" height="30">
+		</a></p>    
+	</div>
 </div>
 <script src="https://alsonzhu123.github.io/SmartFormat/smart-format1.0.2.js"></script>
 <script>
@@ -529,7 +532,7 @@ $('#container').append($new);</pre>
             showLivePreview: true,
             previewElement: '#demoPreview',
             onFormat: function(original, formatted) {
-                $('#demoPreview').html('📋 实时格式化结果：<br>原始：' + original + '<br>格式化后：' + formatted);
+                $('#demoPreview').html('📋 实时格式化结果：<br>原始：<br><b>' + original + '</b><br><br>格式化后：<br><b>' + formatted +'</b>');
             }
         });
 
