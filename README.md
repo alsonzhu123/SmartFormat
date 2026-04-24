@@ -50,8 +50,8 @@ SmartFormat 是一个基于 jQuery 的智能输入格式化插件，专为需要
 <script src="smart-format.js"></script>
 ```
 ### 2. 初始化插件
-javascript
-```html
+
+```javascript
 // 基础用法
 $('#myInput').smartFormat();
 
@@ -65,8 +65,8 @@ $('#myInput').smartFormat({
 });
 ```
 ### 3. 方法调用
-javascript
-```html
+
+``` javascript
 // 手动触发格式化
 var formatted = $('#myInput').smartFormat('format');
 
