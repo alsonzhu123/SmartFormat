@@ -1,96 +1,10 @@
 /**
- * SmartFormat - 智能输入格式化插件
+ * SmartFormat - 智能输入格式化插件 version 1.02
  * 功能：全角转半角、文件名小写、句子首字母大写、特殊单词保留、不干扰其他语言输入法
-
-	一、引入依赖
-		<!-- 引入 jQuery -->
-		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-		<!-- 引入 SmartFormat 插件 -->
-		<script src="smart-format.js"></script>
+ * @Alson zhu
+ * E-Mail: alsonzhu@hotmail.com
  
- 
- * 
- *	一、使用方式：
- *	1.	$('#input').smartFormat();                    // 默认配置
- *	2.	$('#input').smartFormat({ debug: true });     // 开启调试
- *	3.	$('#input').smartFormat('destroy');           // 销毁插件
- *
- *
-二、API 参考表
-序	方法										说明								返回值
-1.	smartFormat(options)					初始化插件						jQuery对象
-	最简单的初始化: $('#myInput').smartFormat();
-	带配置的初始化: $('#myInput').smartFormat({debug: true,autoFormat: true});
-
-2.	smartFormat('format')					手动触发格式化，返回格式化后的值		String
-	手动触发格式化: var formatted = $('#myInput').smartFormat('format'); console.log('格式化结果:', formatted);
-
-3.	smartFormat('getValue')					获取格式化后的值（不修改输入框）		String
-	获取格式化后的值（不修改输入框）: var currentFormatted = $('#myInput').smartFormat('getValue'); console.log('格式化结果:', currentFormatted);
-
-4.	martFormat('updateOptions', options)	动态更新配置						jQuery对象
-	动态更新配置: $('#myInput').smartFormat('updateOptions', {specialWords: {'myapp': 'MyApp'}});
-
-5.	smartFormat('destroy')					销毁插件，恢复原始状态				jQuery对象
-	销毁插件: $('#myInput').smartFormat('destroy');
- 
- 
- *
-三、配置选项
-序	选项						类型				默认值	说明
-1.	fullWidthToHalf			boolean			true	功能开关:   全角转半角
-2.	fileNameLowercase		boolean			true	功能开关:   文件名小写
-3.	sentenceFormat			boolean			true	功能开关:   句子格式化（首字母大写）
-4.	preserveSpecialWords	boolean			true	功能开关:   保留特殊单词格式
-5.	formatOnCompositionEnd	boolean			true	输入法相关: 输入法确认后执行格式化 
-6.	autoFormat				boolean			true	事件控制:   输入时自动格式化
-7.	formatOnBlur			boolean			true	事件控制:   失去焦点时格式化
-8.	previewElement			string/object	null	UI 相关:    预览元素
-9.	previewElement			string/object	null	UI 相关:    预览元素的选择器或jQuery对象
-10.	specialWords			object			内置映射表		数据配置： 特殊单词映射（小写→正确格式）
-11.	fileExtensions			array			内置扩展名列表	数据配置： 文件扩展名列表
-12.	debug					boolean			false	调试与回调： 开启调试模式（控制台输出）
-13.	onFormat				function		null	调试与回调： 格式化回调
-14.	onError					function		null	调试与回调： 错误回调
-
-10.	showLivePreview			boolean			false	显示实时预览
-
-*
- *
- *
- *
- * 
- *
- *
- *
- *
- *
- *
- *
- * 
- *
- *
- *
- *
- *
- *
- *
- * 
- *
- *
- * 
- * @author Your Name
- * @version 1.0.0
- */
-/**
- * SmartFormat - 智能输入格式化插件（修正版）
- * 功能：全角转半角、句子中文件名小写、句子首字母大写、特殊单词保留
- * 
- * 修正点1：只将句子中的文件名部分转为小写，不改变整个句子的格式
- * 例如："The file is Test.ipa" → "The File Is Test.ipa"
- * 
- * 修正点2：支持中文等输入法，等字符确认后再格式化（compositionstart/compositionend）
- */
+ **/
 
 ;(function($, window, document, undefined) {
     'use strict';
