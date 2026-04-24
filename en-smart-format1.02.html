@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartFormat 插件使用手册 | 智能输入格式化插件</title>
+    <!-- 引入 jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        /* 容器 */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* 头部 Hero */
+        .hero {
+            background: white;
+            border-radius: 24px;
+            padding: 48px 40px;
+            margin-bottom: 32px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+        }
+
+        .hero .badge {
+            display: inline-block;
+            background: #e8f4f8;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            color: #0056b3;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .hero .version {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #999;
+        }
+
+        /* 网格布局 */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        /* 卡片样式 */
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        }
+
+        .card h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #667eea;
+            display: inline-block;
+        }
+
+        .card h3 {
+            font-size: 16px;
+            color: #667eea;
+            margin: 16px 0 12px 0;
+        }
+
+        /* 代码块 */
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 16px;
+            border-radius: 12px;
+            overflow-x: auto;
+            font-family: 'Fira Code', 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.5;
+            margin: 12px 0;
+        }
+
+        .code-block pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        /* 表格样式 */
+        .api-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .api-table th,
+        .api-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .api-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .api-table td {
+            color: #666;
+        }
+
+        .api-table code {
+            background: #f0f0f0;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 12px;
+            color: #d63384;
+        }
+
+        /* 标签样式 */
+        .tag {
+            display: inline-block;
+            background: #e8f4f8;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            margin: 4px 4px 4px 0;
+        }
+
+        .tag-blue {
+            background: #667eea;
+            color: white;
+        }
+
+        .tag-green {
+            background: #28a745;
+            color: white;
+        }
+
+        .tag-orange {
+            background: #fd7e14;
+            color: white;
+        }
+
+        /* 功能特性 */
+        .feature-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .feature-item {
+            background: #f8f9fa;
+            padding: 10px 16px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+
+        .feature-item .emoji {
+            font-size: 18px;
+        }
+
+        /* 交互演示区 */
+        .demo-area {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 20px;
+            padding: 32px;
+            margin-bottom: 32px;
+        }
+
+        .demo-area h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .demo-input {
+            width: 100%;
+            padding: 14px 18px;
+            font-size: 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .demo-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102,126,234,0.1);
+        }
+
+        .demo-preview {
+            margin-top: 16px;
+            padding: 14px 18px;
+            background: white;
+            border-radius: 12px;
+            font-size: 14px;
+            color: #666;
+            font-family: monospace;
+        }
+
+        .demo-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .demo-btn {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s;
+        }
+
+        .demo-btn:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        /* 页脚 */
+        .footer {
+            text-align: center;
+            padding: 32px;
+            color: rgba(255,255,255,0.8);
+            font-size: 14px;
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .grid-2, .grid-3 {
+                grid-template-columns: 1fr;
+            }
+            .hero h1 {
+                font-size: 32px;
+            }
+        }
+
+        /* 滚动条 */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- Hero 区域 -->
+    <div class="hero">
+        <div class="badge">✨ jQuery 插件 | 智能输入格式化</div>
+        <h1>SmartFormat</h1>
+        <p>全角转半角 · 文件名小写 · 句子格式化 · 特殊单词保留 · 输入法友好</p>
+        <div class="version">v1.1.0 | 支持中文/日文/韩文输入法</div>
+    </div>
+
+    <!-- 交互演示区 -->
+    <div class="demo-area">
+        <h2>🎮 在线演示</h2>
+        <input type="text" id="demoInput" class="demo-input" placeholder="试试输入：hello world 或 readme.txt 或 你好世界" autocomplete="off">
+        <div class="demo-preview" id="demoPreview">
+            📋 实时格式化结果将显示在这里
+        </div>
+        <div class="demo-buttons">
+            <button class="demo-btn" data-value="hello world">hello world</button>
+            <button class="demo-btn" data-value="HELLO WORLD">HELLO WORLD</button>
+            <button class="demo-btn" data-value="readme.txt">readme.txt</button>
+            <button class="demo-btn" data-value="README.TXT">README.TXT</button>
+            <button class="demo-btn" data-value="iphone is great">iphone is great</button>
+            <button class="demo-btn" data-value="The file is Test.ipa">The file is Test.ipa</button>
+            <button class="demo-btn" data-value="ｈｅｌｌｏ　ｗｏｒｌｄ">全角英文</button>
+        </div>
+    </div>
+
+    <!-- 功能特性 -->
+    <div class="card" style="margin-bottom: 32px;">
+        <h2>✨ 核心功能</h2>
+        <div class="feature-list">
+            <div class="feature-item"><span class="emoji">🔤</span> 全角字符转半角</div>
+            <div class="feature-item"><span class="emoji">📄</span> 文件名自动小写</div>
+            <div class="feature-item"><span class="emoji">📝</span> 首字母大写 + 单词首字母大写</div>
+            <div class="feature-item"><span class="emoji">🔠</span> 特殊单词保留格式</div>
+            <div class="feature-item"><span class="emoji">🌐</span> 中文/日文/韩文输入法支持</div>
+            <div class="feature-item"><span class="emoji">🎯</span> 光标位置自动保持</div>
+            <div class="feature-item"><span class="emoji">⚙️</span> 可配置扩展名和特殊单词</div>
+            <div class="feature-item"><span class="emoji">🐛</span> 调试模式支持</div>
+        </div>
+    </div>
+
+    <!-- 快速开始 + API 参考 -->
+    <div class="grid-2">
+        <!-- 快速开始 -->
+        <div class="card">
+            <h2>🚀 快速开始</h2>
+            <h3>1. 引入依赖</h3>
+            <div class="code-block">
+                <pre>&lt;script src="https://code.jquery.com/jquery-3.6.0.min.js"&gt;&lt;/script&gt;
+&lt;script src="smart-format.js"&gt;&lt;/script&gt;</pre>
+            </div>
+            <h3>2. 初始化插件</h3>
+            <div class="code-block">
+                <pre>// 基础用法
+$('#myInput').smartFormat();
+
+// 带配置
+$('#myInput').smartFormat({
+    debug: true,
+    specialWords: { 'ios': 'iOS' }
+});</pre>
+            </div>
+            <h3>3. 方法调用</h3>
+            <div class="code-block">
+                <pre>// 手动格式化
+$('#input').smartFormat('format');
+
+// 获取格式化后的值
+var val = $('#input').smartFormat('getValue');
+
+// 更新配置
+$('#input').smartFormat('updateOptions', { debug: true });
+
+// 销毁插件
+$('#input').smartFormat('destroy');</pre>
+            </div>
+        </div>
+
+        <!-- API 参考 -->
+        <div class="card">
+            <h2>📖 API 方法参考</h2>
+            <table class="api-table">
+                <thead>
+                    <tr><th>方法</th><th>语法</th><th>返回值</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>初始化</code></td><td><code>$el.smartFormat(options)</code></td><td>jQuery对象</td><td>初始化插件</td></tr>
+                    <tr><td><code>format</code></td><td><code>$el.smartFormat('format')</code></td><td>String</td><td>手动触发格式化</td></tr>
+                    <tr><td><code>getValue</code></td><td><code>$el.smartFormat('getValue')</code></td><td>String</td><td>获取格式化后的值</td></tr>
+                    <tr><td><code>updateOptions</code></td><td><code>$el.smartFormat('updateOptions', opts)</code></td><td>jQuery对象</td><td>动态更新配置</td></tr>
+                    <tr><td><code>destroy</code></td><td><code>$el.smartFormat('destroy')</code></td><td>jQuery对象</td><td>销毁插件</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- 配置选项表格 -->
+    <div class="grid-2">
+        <div class="card">
+            <h2>⚙️ 配置选项 (1/2)</h2>
+            <table class="api-table">
+                <thead><tr><th>选项</th><th>类型</th><th>默认值</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>fullWidthToHalf</code></td><td>boolean</td><td>true</td><td>全角转半角</td></tr>
+                    <tr><td><code>fileNameLowercase</code></td><td>boolean</td><td>true</td><td>文件名小写</td></tr>
+                    <tr><td><code>sentenceFormat</code></td><td>boolean</td><td>true</td><td>句子格式化</td></tr>
+                    <tr><td><code>preserveSpecialWords</code></td><td>boolean</td><td>true</td><td>保留特殊单词</td></tr>
+                    <tr><td><code>formatOnCompositionEnd</code></td><td>boolean</td><td>true</td><td>输入法确认后格式化</td></tr>
+                    <tr><td><code>autoFormat</code></td><td>boolean</td><td>true</td><td>输入时自动格式化</td></tr>
+                    <tr><td><code>formatOnBlur</code></td><td>boolean</td><td>true</td><td>失去焦点时格式化</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card">
+            <h2>⚙️ 配置选项 (2/2)</h2>
+            <table class="api-table">
+                <thead><tr><th>选项</th><th>类型</th><th>默认值</th><th>说明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>showLivePreview</code></td><td>boolean</td><td>false</td><td>显示实时预览</td></tr>
+                    <tr><td><code>previewElement</code></td><td>string/object</td><td>null</td><td>预览元素选择器</td></tr>
+                    <tr><td><code>specialWords</code></td><td>object</td><td>内置映射</td><td>特殊单词映射表</td></tr>
+                    <tr><td><code>fileExtensions</code></td><td>array</td><td>内置列表</td><td>文件扩展名列表</td></tr>
+                    <tr><td><code>debug</code></td><td>boolean</td><td>false</td><td>调试模式</td></tr>
+                    <tr><td><code>onFormat</code></td><td>function</td><td>null</td><td>格式化回调</td></tr>
+                    <tr><td><code>onError</code></td><td>function</td><td>null</td><td>错误回调</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- 使用场景 -->
+    <div class="grid-3">
+        <div class="card">
+            <h2>📝 场景1：简单输入框</h2>
+            <div class="code-block">
+                <pre>$('#title').smartFormat();</pre>
+            </div>
+            <p class="tag">适用于标题、名称等单行输入</p>
+        </div>
+        <div class="card">
+            <h2>📋 场景2：批量初始化</h2>
+            <div class="code-block">
+                <pre>$('.formatted').smartFormat({
+    debug: false
+});</pre>
+            </div>
+            <p class="tag">适用于表单多个输入框</p>
+        </div>
+        <div class="card">
+            <h2>➕ 场景3：动态添加元素</h2>
+            <div class="code-block">
+                <pre>var $new = $('&lt;input&gt;');
+$new.smartFormat();
+$('#container').append($new);</pre>
+            </div>
+            <p class="tag">适用于动态添加的表单项</p>
+        </div>
+    </div>
+
+    <!-- 特殊单词表 + 文件扩展名 -->
+    <div class="grid-2">
+        <div class="card">
+            <h2>🔠 内置特殊单词</h2>
+            <div class="code-block" style="max-height: 200px; overflow-y: auto;">
+                <pre>{
+    'iphone': 'iPhone',
+    'ipad': 'iPad',
+    'ios': 'iOS',
+    'macos': 'macOS',
+    'javascript': 'JavaScript',
+    'jquery': 'jQuery',
+    'vue.js': 'Vue.js',
+    'react.js': 'React.js',
+    'angular.js': 'Angular.js',
+    'typescript': 'TypeScript'
+}</pre>
+            </div>
+            <p class="tag">💡 可通过 <code>specialWords</code> 选项扩展</p>
+        </div>
+        <div class="card">
+            <h2>📁 内置文件扩展名</h2>
+            <div class="feature-list" style="max-height: 200px; overflow-y: auto;">
+                <span class="tag">ipa</span><span class="tag">apk</span><span class="tag">exe</span><span class="tag">dmg</span>
+                <span class="tag">txt</span><span class="tag">md</span><span class="tag">js</span><span class="tag">json</span>
+                <span class="tag">html</span><span class="tag">css</span><span class="tag">py</span><span class="tag">java</span>
+                <span class="tag">pdf</span><span class="tag">doc</span><span class="tag">xls</span><span class="tag">zip</span>
+                <span class="tag">png</span><span class="tag">jpg</span><span class="tag">mp3</span><span class="tag">mp4</span>
+                <span class="tag">sh</span><span class="tag">bat</span><span class="tag">sql</span><span class="tag">log</span>
+            </div>
+            <p class="tag">💡 可通过 <code>fileExtensions</code> 选项扩展</p>
+        </div>
+    </div>
+
+    <!-- 注意事项 -->
+    <div class="card">
+        <h2>⚠️ 注意事项</h2>
+        <div class="feature-list">
+            <div class="feature-item"><span class="emoji">📦</span> 需要 jQuery 1.7+</div>
+            <div class="feature-item"><span class="emoji">🌐</span> 支持中文、日文、韩文等 IME 输入法</div>
+            <div class="feature-item"><span class="emoji">🎯</span> 格式化后自动保持光标位置</div>
+            <div class="feature-item"><span class="emoji">⚡</span> 适合 < 5000 字符的文本</div>
+            <div class="feature-item"><span class="emoji">🔧</span> 特殊单词不区分大小写匹配</div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <div class="footer">
+        SmartFormat v1.1.0 | 智能输入格式化插件 | 支持全角转半角 · 文件名小写 · 句子格式化 · 输入法友好
+    </div>
+</div>
+
+<script>
+    // SmartFormat 插件代码（内嵌）
+    (function($, window, document, undefined) {
+        'use strict';
+
+        const defaults = {
+            fullWidthToHalf: true,
+            fileNameLowercase: true,
+            sentenceFormat: true,
+            preserveSpecialWords: true,
+            
+            specialWords: {
+                'iphone': 'iPhone',
+                'ipad': 'iPad',
+                'ios': 'iOS',
+                'macos': 'macOS',
+                'javascript': 'JavaScript',
+                'jquery': 'jQuery',
+                'vue.js': 'Vue.js',
+                'react.js': 'React.js',
+                'angular.js': 'Angular.js',
+                'typescript': 'TypeScript'
+            },
+            
+            fileExtensions: [
+                'ipa', 'apk', 'exe', 'dmg', 'pkg', 'deb', 'rpm',
+                'txt', 'md', 'js', 'ts', 'json', 'xml', 'html', 'css',
+                'py', 'java', 'cpp', 'c', 'go', 'rs', 'php', 'rb',
+                'pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx',
+                'zip', 'rar', '7z', 'tar', 'gz', 'bz2', 'iso',
+                'png', 'jpg', 'jpeg', 'gif', 'svg', 'ico',
+                'mp3', 'mp4', 'avi', 'mov', 'mkv', 'wav',
+                'sh', 'bat', 'ps1', 'sql', 'log', 'csv', 'ini', 'conf'
+            ],
+            
+            debug: false,
+            autoFormat: true,
+            formatOnBlur: true,
+            formatOnCompositionEnd: true,
+            showLivePreview: false,
+            previewElement: null,
+            
+            onFormat: null,
+            onError: null
+        };
+
+        class SmartFormat {
+            constructor(element, options) {
+                this.$element = $(element);
+                this.options = $.extend(true, {}, defaults, options);
+                this.lastValue = '';
+                this.isFormatting = false;
+                this.isComposing = false;
+                this.compositionTimer = null;
+                
+                this._compileRegex();
+                this._init();
+            }
+            
+            _compileRegex() {
+                const extPattern = this.options.fileExtensions.join('|');
+                this.fileNameRegex = new RegExp('\\b([A-Za-z0-9_.-]+)\\.(' + extPattern + ')\\b', 'gi');
+                
+                const specialKeys = Object.keys(this.options.specialWords);
+                if (specialKeys.length > 0) {
+                    const specialPattern = specialKeys.map(k => k.replace(/\./g, '\\.')).join('|');
+                    this.specialWordsRegex = new RegExp('\\b(' + specialPattern + ')\\b', 'gi');
+                }
+            }
+            
+            _init() {
+                if (this.options.debug) console.log('[SmartFormat] 初始化插件', this.$element);
+                
+                this.$element.on('compositionstart.smartFormat', this._handleCompositionStart.bind(this));
+                this.$element.on('compositionend.smartFormat', this._handleCompositionEnd.bind(this));
+                
+                if (this.options.autoFormat) {
+                    this.$element.on('input.smartFormat', this._handleInput.bind(this));
+                }
+                
+                if (this.options.formatOnBlur) {
+                    this.$element.on('blur.smartFormat', this._handleBlur.bind(this));
+                }
+                
+                this.lastValue = this.$element.val();
+                if (this.$element.val()) {
+                    this._formatAndUpdate(this.$element.val(), true);
+                }
+            }
+            
+            _handleCompositionStart() {
+                this.isComposing = true;
+                if (this.options.debug) console.log('[SmartFormat] 输入法激活，暂停格式化');
+            }
+            
+            _handleCompositionEnd(e) {
+                this.isComposing = false;
+                if (this.options.debug) console.log('[SmartFormat] 输入法结束，准备格式化');
+                
+                if (this.compositionTimer) clearTimeout(this.compositionTimer);
+                if (this.options.formatOnCompositionEnd) {
+                    this.compositionTimer = setTimeout(() => {
+                        const currentValue = this.$element.val();
+                        if (currentValue !== this.lastValue) {
+                            this._formatAndUpdate(currentValue, false, this.$element[0].selectionStart);
+                        }
+                        this.compositionTimer = null;
+                    }, 10);
+                }
+            }
+            
+            _handleInput(e) {
+                if (this.isComposing) {
+                    if (this.options.debug) console.log('[SmartFormat] 输入法输入中，跳过格式化');
+                    this.lastValue = this.$element.val();
+                    return;
+                }
+                if (this.isFormatting) return;
+                const currentValue = this.$element.val();
+                const cursorPos = this.$element[0].selectionStart;
+                if (currentValue === this.lastValue) return;
+                this._formatAndUpdate(currentValue, false, cursorPos);
+            }
+            
+            _handleBlur() {
+                this.isComposing = false;
+                const currentValue = this.$element.val();
+                const formatted = this.format(currentValue);
+                if (formatted !== currentValue) this._updateValue(formatted);
+                if (this.options.onFormat) this.options.onFormat(currentValue, formatted);
+            }
+            
+            _formatAndUpdate(value, isInit = false, cursorPos = null) {
+                this.isFormatting = true;
+                const originalValue = value;
+                let formattedValue = this.format(originalValue);
+                if (this.options.debug) console.log('[SmartFormat] 格式化:', { 原始: originalValue, 格式化后: formattedValue });
+                this._updatePreview(formattedValue);
+                if (formattedValue !== originalValue) this._updateValue(formattedValue, cursorPos, originalValue.length);
+                this.lastValue = formattedValue;
+                this.isFormatting = false;
+                if (this.options.onFormat && !isInit) this.options.onFormat(originalValue, formattedValue);
+            }
+            
+            _updateValue(newValue, cursorPos = null, oldLength = null) {
+                const oldValue = this.$element.val();
+                const inputElement = this.$element[0];
+                if (newValue === oldValue) return;
+                let newCursorPos = cursorPos;
+                if (cursorPos !== null && oldLength !== null) {
+                    const diff = oldLength - newValue.length;
+                    newCursorPos = cursorPos - diff;
+                    newCursorPos = Math.max(0, Math.min(newCursorPos, newValue.length));
+                }
+                this.$element.val(newValue);
+                if (newCursorPos !== null && newCursorPos >= 0) inputElement.setSelectionRange(newCursorPos, newCursorPos);
+            }
+            
+            _updatePreview(value) {
+                if (!this.options.showLivePreview) return;
+                let $preview = this.options.previewElement;
+                if (typeof $preview === 'string') $preview = $($preview);
+                if ($preview && $preview.length) $preview.text(value || '(空)');
+            }
+            
+            _fullWidthToHalfWidth(str) {
+                if (!str || !this.options.fullWidthToHalf) return str;
+                let result = '';
+                for (let i = 0; i < str.length; i++) {
+                    let code = str.charCodeAt(i);
+                    if (code === 0x3000) { result += ' '; continue; }
+                    if (code >= 0xFF01 && code <= 0xFF5E) result += String.fromCharCode(code - 0xFEE0);
+                    else result += str[i];
+                }
+                return result;
+            }
+            
+            _lowercaseFileNames(str) {
+                if (!str || !this.options.fileNameLowercase) return str;
+                return str.replace(this.fileNameRegex, match => match.toLowerCase());
+            }
+            
+            _formatSentence(str) {
+                if (!str || !this.options.sentenceFormat) return str;
+                const fileNames = [];
+                let protectedText = str.replace(this.fileNameRegex, function(match) {
+                    const placeholder = `__FILE_${fileNames.length}__`;
+                    fileNames.push(match);
+                    return placeholder;
+                });
+                protectedText = protectedText.replace(/\s+/g, ' ');
+                protectedText = protectedText.replace(/\b\w+\b/g, function(word) {
+                    if (word.startsWith('__FILE_')) return word;
+                    if (word.length === 0) return word;
+                    return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                });
+                if (protectedText.length > 0 && protectedText[0] !== ' ') {
+                    protectedText = protectedText.charAt(0).toUpperCase() + protectedText.slice(1);
+                }
+                if (this.options.preserveSpecialWords && this.specialWordsRegex) {
+                    protectedText = protectedText.replace(this.specialWordsRegex, (match) => {
+                        if (match.startsWith('__FILE_')) return match;
+                        const lowerMatch = match.toLowerCase();
+                        return this.options.specialWords[lowerMatch] || match;
+                    });
+                }
+                fileNames.forEach((fileName, index) => {
+                    protectedText = protectedText.replace(`__FILE_${index}__`, fileName);
+                });
+                return protectedText;
+            }
+            
+            format(value) {
+                if (typeof value !== 'string') return '';
+                try {
+                    let result = this._fullWidthToHalfWidth(value);
+                    if (this.options.fileNameLowercase) result = this._lowercaseFileNames(result);
+                    result = this._formatSentence(result);
+                    return result;
+                } catch (error) {
+                    if (this.options.debug) console.error('[SmartFormat] 格式化错误:', error);
+                    if (this.options.onError) this.options.onError(error);
+                    return value;
+                }
+            }
+            
+            formatCurrent() {
+                const currentValue = this.$element.val();
+                const formatted = this.format(currentValue);
+                if (formatted !== currentValue) this._updateValue(formatted);
+                return formatted;
+            }
+            
+            getFormattedValue() { return this.format(this.$element.val()); }
+            
+            updateOptions(options) {
+                this.options = $.extend(true, {}, this.options, options);
+                this._compileRegex();
+                if (this.options.debug) console.log('[SmartFormat] 配置已更新', this.options);
+                this.formatCurrent();
+            }
+            
+            destroy() {
+                if (this.options.debug) console.log('[SmartFormat] 销毁插件', this.$element);
+                this.$element.off('.smartFormat');
+                this.$element.removeData('smartFormat');
+                if (this.compositionTimer) clearTimeout(this.compositionTimer);
+            }
+        }
+        
+        $.fn.smartFormat = function(options) {
+            if (typeof options === 'string') {
+                const instance = this.data('smartFormat');
+                if (!instance) { $.error('SmartFormat 未初始化，请先调用 .smartFormat()'); return this; }
+                if (options === 'destroy') { instance.destroy(); return this; }
+                if (options === 'format') return instance.formatCurrent();
+                if (options === 'getValue') return instance.getFormattedValue();
+                if (options === 'updateOptions') { instance.updateOptions(arguments[1]); return this; }
+            }
+            return this.each(function() {
+                const $this = $(this);
+                if (!$this.data('smartFormat')) {
+                    const instance = new SmartFormat(this, options);
+                    $this.data('smartFormat', instance);
+                }
+            });
+        };
+    })(jQuery, window, document);
+
+    // 演示区初始化
+    $(document).ready(function() {
+        $('#demoInput').smartFormat({
+            debug: false,
+            showLivePreview: true,
+            previewElement: '#demoPreview',
+            onFormat: function(original, formatted) {
+                $('#demoPreview').html('📋 实时格式化结果：<br>原始：' + original + '<br>格式化后：' + formatted);
+            }
+        });
+
+        $('.demo-btn').on('click', function() {
+            var value = $(this).data('value');
+            $('#demoInput').val(value).trigger('input');
+        });
+    });
+</script>
+</body>
+</html>
