@@ -10,7 +10,7 @@
 
 [![使用方法](https://img.shields.io/badge/使用-快速开始-brightgreen.svg)](#快速开始)
 [![API参考](https://img.shields.io/badge/API-参考-blue.svg)](#api-方法参考)
-[![配置选项](https://img.shields.io/badge/配置-选项-yellow.svg)](#配置选项)
+[![配置选项](https://img.shields.io/badge/配置-选项-yellow.svg)](#%EF%B8%8F-%E9%85%8D%E7%BD%AE%E9%80%89%E9%A1%B9)
 
 </div>
 
